@@ -9,21 +9,24 @@ class Solution:
         currA = capacityA
         currB = capacityB
         
-        for i in range(N // 2) :
+        L, R = 0, N - 1
+        
+        while(L < R ):
             
-            if currA >= plants[i] : currA -= plants[i]
+            if currA >= plants[L] : currA -= plants[L]
             else : 
-                print('1')
                 count += 1
-                currA = capacityA - plants[i]
+                currA = capacityA - plants[L]
                 
-            if currB >= plants[N - 1 - i] : currB -= plants[N - 1 - i]
+            if currB >= plants[R] : currB -= plants[R]
             else : 
-                print('2')
                 count += 1
-                currB = capacityB - plants[N - 1 - i]
+                currB = capacityB - plants[R]
                 
-        if N % 2 == 1 and max(currA, currB) < plants[(N // 2)] : count +=1
+            L += 1
+            R -= 1
+            
+        if L == R and max(currA, currB) < plants[L] : count += 1
             
         return count
                 
